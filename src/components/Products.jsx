@@ -5,31 +5,29 @@ import info from "../info";
 export default function Products(data) {
   useEffect(() => {
     axios.get(info.backendUrl + "/products/" + data.lpn).then((result) => {
-      //console.log(result.data.response.products);
       data.setProducts(result.data.response.products);
     });
   }, []);
   return (
-    <div className="blue-page">
-      <h2>Vælg program</h2>
-      {/* {console.log(data.products)} */}
+    <div className="component blue-page">
+      <h2 className="products--h2">Vælg program</h2>
       {data.products.map((product) => {
         return (
           <div
             key={product.productid}
-            className="card"
-            id={"card-" + product.productid}
+            className="products"
+            id={"products-" + product.productid}
           >
-            <div className="card-body">
-              <h5 className="card-title">{product.name}</h5>
-              <p className="card-text">{product.description}</p>
-              <p className="card-text program-price">{product.price}</p>
+            <div className="products-body">
+              <h5 className="products-name">{product.name}</h5>
+              <p className="products-description">{product.description}</p>
+              <p className="prodtucts-text">{product.price}</p>
               <button
-                className="btn btn-wash btn-card"
+                className="btn btn-active btn-card"
                 onClick={data.chooseWash}
                 value={product.program}
               >
-                Program {product.program}
+                Program {product.name}
               </button>
             </div>
           </div>

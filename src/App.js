@@ -5,6 +5,7 @@ import WashLocation from "./components/WashLocation";
 import Products from "./components/Products";
 import Cam from "./components/Cam";
 import Status from "./components/Status";
+import Navbar from "./components/Navbar";
 import "./style.css";
 
 function App() {
@@ -32,10 +33,22 @@ function App() {
     setProgramID(event.target.value);
   }
 
+  function timer() {
+    var sec = 30;
+    var timer = setInterval(function () {
+      document.getElementById("safeTimerDisplay").innerHTML = "00:" + sec;
+      sec--;
+      if (sec < 0) {
+        clearInterval(timer);
+      }
+    }, 1000);
+  }
+
   return (
-    <div>
+    <div className="component">
+      <Navbar />
       <main>
-        {/*Bruges til at sætte de forskellige knapper op. */}
+        {/*Bruges til at sætte de forskellige knapper op. Samt skifte side*/}
         {locations.length > 0 &&
           locationID === 0 &&
           //cam.length == 0 &&
@@ -69,7 +82,7 @@ function App() {
           />
         )}
         {programID !== 0 && (
-          <Status locationID={locationID} programID={programID} />
+          <Status locationID={locationID} programID={programID} timer={timer} />
         )}
       </main>
     </div>

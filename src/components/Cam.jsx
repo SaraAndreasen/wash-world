@@ -7,7 +7,6 @@ export default function Cam(data) {
 
   useEffect(() => {
     axios.get(info.backendUrl + "/cam/" + data.LocationID).then((result) => {
-      //console.log(result.data);
       setBackendLpn(result.data);
       console.log(result.data.lpn);
     });
@@ -27,8 +26,11 @@ export default function Cam(data) {
   }
   return (
     <div className="component green-page">
-      <h1>{lpn}</h1>
-      <button onClick={confirmLpn}>Confirm</button>
+      <h2 className="cam--h2">License plate</h2>
+      <h1 className="cam--h1">{lpn}</h1>
+      <button className="btn cam--btn btn-active" onClick={confirmLpn}>
+        Confirm
+      </button>
     </div>
   );
 }
